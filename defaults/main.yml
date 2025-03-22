@@ -35,5 +35,5 @@ bitcoin_rpc_allow_ip: 127.0.0.1
 bitcoin_zmq_host: 127.0.0.1
 
 # Systemd service file options
-#bitcoin_timeout: 900
+# bitcoin_timeout: 900
 bitcoin_pidfile: /run/bitcoind/{{ bitcoin_network }}/bitcoind.pid
