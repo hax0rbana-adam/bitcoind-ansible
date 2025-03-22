@@ -20,6 +20,8 @@ bitcoin_pgp_builders_pub_key:
 bitcoin_data_dir: /data/bitcoin
 bitcoin_network: main
 bitcoin_bind: 127.0.0.1
+bitcoin_config_extra:
+  - txindex=1
 
 # Bitcoin RPC server auth data. These default values are not
 # recommended, and you should use your own ones. You are going
