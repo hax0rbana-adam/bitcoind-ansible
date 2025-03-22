@@ -6,6 +6,11 @@ daemon=1
 server=1
 txindex=1
 chain={{ bitcoin_network }}
+{% if bitcoin_config_extra %}
+{% for line in bitcoin_config_extra %}
+  {{ line }}
+{% endfor %}
+{% endif %}
 
 zmqpubrawblock=tcp://{{ bitcoin_zmq_host }}:28332
 zmqpubrawtx=tcp://{{ bitcoin_zmq_host }}:28333
