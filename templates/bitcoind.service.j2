@@ -6,11 +6,14 @@ After=network.target
 
 [Service]
 Type=forking
-ExecStart=/usr/local/bitcoin-core-{{ bitcoin_version }}/bin/bitcoind -conf=/etc/bitcoin/{{ bitcoin_network }}/bitcoin.conf
+ExecStart=/usr/local/bitcoin-core-{{ bitcoin_version }}/bin/bitcoind -conf=/etc/bitcoin/{{ bitcoin_network }}/bitcoin.conf -daemonwait
+{% if bitcoin_timeout is defined %}
+TimeoutSec={{ bitcoin_timeout }}
+{% endif %}
 
 # It is recommended to use this field if service Type is set to forking,
 # so that systemd can reliably identify the main process of the service.
-PIDFile=/run/bitcoind/{{ bitcoin_network }}/bitcoind.pid
+PIDFile={{bitcoin_pidfile}}
 
 # Bitcoin runtime /run/bitcoind/{{ bitcoin_network }}
 RuntimeDirectory=bitcoind/{{ bitcoin_network }}

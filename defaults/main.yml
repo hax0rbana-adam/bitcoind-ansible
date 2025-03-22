@@ -33,3 +33,7 @@ bitcoin_rpc_allow_ip: 127.0.0.1
 # This is the host where you want to expose the ZMQ TCP socket
 # to receive raw block and transaction updates.
 bitcoin_zmq_host: 127.0.0.1
+
+# Systemd service file options
+#bitcoin_timeout: 900
+bitcoin_pidfile: /run/bitcoind/{{ bitcoin_network }}/bitcoind.pid
