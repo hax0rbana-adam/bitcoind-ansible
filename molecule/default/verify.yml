@@ -8,12 +8,12 @@
 
   tasks:
     - name: "Retrieve information from /usr/local/bitcoin-core-{{ bitcoin_version }}"
-      stat:
+      ansible.builtin.stat:
         path: "/usr/local/bitcoin-core-{{ bitcoin_version }}"
       register: bitcoin_directory
 
-    - name: "Test that Bitcoin Core v{{ bitcoin_version }} directory was created correctly"
-      assert:
+    - name: "Test that directory was created correctly for Bitcoin Core v{{ bitcoin_version }}"
+      ansible.builtin.assert:
         that:
           - bitcoin_directory.stat.exists
           - bitcoin_directory.stat.isdir
