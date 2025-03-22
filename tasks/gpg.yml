@@ -23,7 +23,7 @@
     mode: '700'
 
 - name: "Bitcoind | Verify GPG signature using for {{ gpg_user }}"
-  ansible.builting.command: >
+  ansible.builtin.command: >
     gpg --keyring {{ gpg_home_dir }}/bitcoin-v{{ bitcoin_version }}-{{ gpg_user }}.gpg
     --no-default-keyring --verify /tmp/gpg-{{ gpg_user }}/all.SHA256SUMS.asc /tmp/SHA256SUMS
   changed_when: false
