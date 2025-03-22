@@ -6,7 +6,7 @@ After=network.target
 
 [Service]
 Type=forking
-ExecStart=/usr/local/bitcoin-core-{{ bitcoin_version }}/bin/bitcoind -conf=/etc/bitcoin/{{ bitcoin_network }}/bitcoin.conf -daemonwait
+ExecStart=/usr/local/bitcoin-core-{{ bitcoin_version }}/bin/bitcoind -conf=/etc/bitcoin/{{ bitcoin_network }}/bitcoin.conf
 {% if bitcoin_timeout is defined %}
 TimeoutSec={{ bitcoin_timeout }}
 {% endif %}
