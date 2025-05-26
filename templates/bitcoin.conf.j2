@@ -7,7 +7,7 @@ server=1
 chain={{ bitcoin_network }}
 {% if bitcoin_config_extra %}
 {% for line in bitcoin_config_extra %}
-  {{ line }}
+{{ line }}
 {% endfor %}
 {% endif %}
 
