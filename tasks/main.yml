@@ -116,9 +116,47 @@
     owner: "{{ bitcoin_user }}"
     group: "{{ bitcoin_group }}"
 
-- name: "Bitcoind | Ensure systemd unit is enabled and started"
-  ansible.builtin.systemd:
-    name: bitcoind-{{ bitcoin_network }}.service
-    daemon_reload: true
-    enabled: true
-    state: started
+- name: Ensuring tor package is installed
+  ansible.builtin.package:
+    name: tor
+  when: bitcoin_use_tor
+
+- name: Ensuring bitcoind will continue to listen for connections
+  ansible.builtin.lineinfile:
+    dest: /etc/bitcoin/main/bitcoin.conf
+    regexp: ^listen=.*
+    line: listen=1
+  notify: Bitcoind | Ensure bitcoind systemd unit is restarted
+  when: bitcoin_use_tor
+
+- name: Setting up outbound connections to use tor
+  ansible.builtin.lineinfile:
+    dest: /etc/bitcoin/main/bitcoin.conf
+    regexp: ^proxy=.*
+    line: proxy=127.0.0.1:9050
+  notify: Bitcoind | Ensure bitcoind systemd unit is restarted
+  when: bitcoin_use_tor
+
+- name: Configuring tor to allow programmatically create tor hidden services
+  ansible.builtin.lineinfile:
+    dest: /etc/tor/torrc
+    regexp: ^[#]ControlPort .*
+    line: ControlPort 9051
+  notify: Restart tor
+  when: bitcoin_use_tor and bitcoin_hidden_service
+
+- name: Ensuring only authenticated users can create tor hidden services
+  ansible.builtin.lineinfile:
+    dest: /etc/tor/torrc
+    regexp: ^[#]CookieAuthentication .*
+    line: CookieAuthentication 1
+  notify: Restart tor
+  when: bitcoin_use_tor and bitcoin_hidden_service
+
+- name: Ensuring the user who runs the bitcoind can create tor hidden services
+  ansible.builtin.user:
+    user: "{{ bitcoin_user }}"
+    groups: debian-tor
+    append: true
+  notify: Bitcoind | Ensure bitcoind systemd unit is restarted
+  when: bitcoin_use_tor and bitcoin_hidden_service and ansible_os_family == 'Debian'

@@ -39,3 +39,7 @@ bitcoin_zmq_host: 127.0.0.1
 # Systemd service file options
 # bitcoin_timeout: 900
 bitcoin_pidfile: /run/bitcoind/{{ bitcoin_network }}/bitcoind.pid
+
+bitcoin_use_tor: true
+# Having a hidden service requires use_tor be on
+bitcoin_hidden_service: true

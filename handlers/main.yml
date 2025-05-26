@@ -2,4 +2,11 @@
 - name: Bitcoind | Ensure bitcoind systemd unit is restarted
   ansible.builtin.systemd:
     name: bitcoind-{{ bitcoin_network }}.service
+    daemon_reload: true
+    enabled: true
+    state: restarted
+
+- name: Restart tor
+  ansible.builtin.systemd:
+    name: tor
     state: restarted
