@@ -6,4 +6,4 @@
   vars:
     bitcoin_network: regtest
   roles:
-    - fooock.bitcoind
+    - hax0rbana-adam.bitcoind
