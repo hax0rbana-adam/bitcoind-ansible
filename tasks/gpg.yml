@@ -3,11 +3,11 @@
 # away from this file common tasks like setting facts, install dependencies, etc
 ---
 - name: "Bitcoind | Ensure Bitcoin PGP public key is added for user {{ gpg_user }}"
-  ansible.builtin.apt_key:
-    id: "{{ gpg_id }}"
-    keyserver: hkps://keys.openpgp.org
-    state: present
-    keyring: "{{ gpg_home_dir }}/bitcoin-v{{ bitcoin_version }}-{{ gpg_user }}.gpg"
+  ansible.builtin.command:
+    cmd: >
+      gpg --keyring {{ gpg_home_dir }}/bitcoin-v{{ bitcoin_version }}-{{ gpg_user }}.gpg
+      --no-default-keyring --keyserver keys.openpgp.org --recv-keys {{ gpg_id }}
+    creates: "{{ gpg_home_dir }}/bitcoin-v{{ bitcoin_version }}-{{ gpg_user }}.gpg"
 
 - name: "Bitcoind | Ensure tmp directory exists /tmp/gpg-{{ gpg_user }}"
   ansible.builtin.file:
