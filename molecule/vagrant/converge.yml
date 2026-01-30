@@ -8,4 +8,4 @@
   vars:
     bitcoin_network: signet
   roles:
-    - hax0rbana-adam.bitcoind
+    - hax0rbana_adam.bitcoind
