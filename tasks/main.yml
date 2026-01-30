@@ -98,6 +98,9 @@
   ansible.builtin.file:
     path: "{{ bitcoin_data_dir }}"
     state: directory
+    owner: "{{ bitcoin_user }}"
+    group: "{{ bitcoin_group }}"
+    recurse: true
     mode: '750'
 
 - name: "Bitcoind | Ensure Bitcoin data directory has correct permissions: {{ bitcoin_data_dir }}"
