@@ -11,10 +11,14 @@ bitcoin_arch: x86_64-linux-gnu
 # this link https://github.com/bitcoin-core/guix.sigs. The ID of each
 # user can be found here https://github.com/bitcoin/bitcoin/blob/23.x/contrib/builder-keys/keys.txt
 bitcoin_pgp_builders_pub_key:
-  - id: 71A3B16735405025D447E8F274810B012346C9A6
-    name: laanwj
   - id: E777299FC265DD04793070EB944D35F9AC3DB76A
     name: fanquake
+  - id: 9EDAFF80E080659604F4A76B2EBB056FD847F8A7
+    name: Emzy
+  - id: 9D3CC86A72F8494342EA5FD10A41BDC3F4FAFF1C
+    name: sipsorcery
+  - id: F4FC70F07310028424EFC20A8E4256593F177720
+    name: guggero
 
 # Bitcoin node configuration
 bitcoin_data_dir: /data/bitcoin
